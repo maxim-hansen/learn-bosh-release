@@ -5,8 +5,8 @@ require 'securerandom'
 server_id = SecureRandom.uuid
 
 get '/' do
-  name = 'Maria'
-  
+  name = 'BOSH User'
+
   "Hello, #{name} from #{server_id}"
 end
 
