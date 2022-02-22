@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 
 RUN_DIR=/var/vcap/sys/run/app
 LOG_DIR=/var/vcap/sys/log/app
@@ -6,9 +7,8 @@ LOG_DIR=/var/vcap/sys/log/app
 PIDFILE=$RUN_DIR/app.pid
 RUNAS=vcap
 
-export PATH=/var/vcap/packages/ruby/bin:$PATH
-export BUNDLE_GEMFILE=/var/vcap/packages/simple_server/Gemfile
-export GEM_HOME=/var/vcap/packages/simple_server/gem_home/ruby/2.1.0
+source /var/vcap/packages/ruby-*/bosh/runtime.env
+source /var/vcap/packages/simple_server/bosh/runtime.env
 
 function pid_exists() {
   ps -p $1 &> /dev/null

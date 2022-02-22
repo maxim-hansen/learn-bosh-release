@@ -1,11 +1,14 @@
-set -e
+#!/bin/bash
+set -eu
 
-cp -r simple_server/* ${BOSH_INSTALL_TARGET}
+RUBY_PACKAGE_VERSION="2.7.5-r0.80.0"
+source "/var/vcap/packages/ruby-${RUBY_PACKAGE_VERSION}/bosh/compile.env"
 
-cd ${BOSH_INSTALL_TARGET}
+cp -r simple_server/* "$BOSH_INSTALL_TARGET"
 
-find .
+mkdir -p "${BOSH_INSTALL_TARGET}/gem_home"
 
-mkdir -p ${BOSH_INSTALL_TARGET}/gem_home
+cd "$BOSH_INSTALL_TARGET"
 
-/var/vcap/packages/ruby/bin/bundle install --local --no-prune --path ${BOSH_INSTALL_TARGET}/gem_home
+bosh_bundle_local
+bosh_generate_runtime_env

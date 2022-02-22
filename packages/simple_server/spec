@@ -1,6 +1,6 @@
 ---
 name: simple_server
 dependencies:
-- ruby
+- ruby-2.7.5-r0.80.0
 files:
 - simple_server/**/*
